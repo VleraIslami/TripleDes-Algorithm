@@ -18,7 +18,8 @@ def encrypt_file(input_file_path, output_file_path, key1, key2):
         ciphered_chunk = cipher.encrypt(chunk)
         ciphered_chunk2 = cipher2.encrypt(ciphered_chunk)
         output_file.write(ciphered_chunk2)
-def decrypt_file(input_file_path, output_file_path, key1, key2):
+
+        def decrypt_file(input_file_path, output_file_path, key1, key2):
     block_size = DES3.block_size
     with open(input_file_path, 'rb') as input_file, open(output_file_path, 'wb') as output_file:
         iv = input_file.read(block_size)
