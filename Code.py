@@ -18,3 +18,23 @@ def encrypt_file(input_file_path, output_file_path, key1, key2):
         ciphered_chunk = cipher.encrypt(chunk)
         ciphered_chunk2 = cipher2.encrypt(ciphered_chunk)
         output_file.write(ciphered_chunk2)
+        
+        
+        
+        output_file.write(cipher2.decrypt(deciphered_chunk))
+
+if name == 'main':
+    key1 = bytes.fromhex('00112233445566778899aabbccddeeff')
+    key2 = bytes.fromhex('00112233445566778899aabbccddeeff')
+
+    input_file_path = r'C:\Users\Online\Desktop\Siguri1\vlera.txt'
+    encrypted_file_path = r'C:\Users\Online\Desktop\Siguri1\encrypted_file.bin'
+    decrypted_file_path = r'C:\Users\Online\Desktop\Siguri1\decrypted_file.txt'
+
+    # Encrypt file
+    encrypt_file(input_file_path, encrypted_file_path, key1, key2)
+    print('File encrypted successfully.')
+
+    # Decrypt file
+    decrypt_file(encrypted_file_path, decrypted_file_path, key1, key2)
+    print('File decrypted successfully.')
