@@ -19,3 +19,16 @@ def encrypt_file(input_file_path, output_file_path, key):
 def decrypt_file(input_file_path, output_file_path, key):
     block_size = DES3.block_size
     with open(input_file_path, 'rb') as input_file, open(output_file_path, 'wb') as output_file:
+
+
+input_file_path = r'C:\Users\Online\Desktop\Siguri1\vlera.txt'
+    encrypted_file_path = r'C:\Users\Online\Desktop\Siguri1\encrypted_file.bin'
+    decrypted_file_path = r'C:\Users\Online\Desktop\Siguri1\decrypted_file.txt'
+
+    # Encrypt file
+    encrypt_file(input_file_path, encrypted_file_path, key)
+    print('File encrypted successfully.')
+
+    # Decrypt file
+    decrypt_file(encrypted_file_path, decrypted_file_path, key)
+    print('File decrypted successfully.')
