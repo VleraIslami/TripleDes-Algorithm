@@ -9,21 +9,31 @@ def encrypt_file(input_file_path, output_file_path, key1, key2):
     cipher2 = DES3.new(key2, DES3.MODE_CBC, iv=iv)
     with open(input_file_path, 'rb') as input_file, open(output_file_path, 'wb') as output_file:
         output_file.write(iv)
-    while True:
-        chunk = input_file.read(1024 * block_size)
-        if len(chunk) == 0:
-            break
-        elif len(chunk) % block_size != 0:
-            chunk += b' ' * (block_size - len(chunk) % block_size)
-        ciphered_chunk = cipher.encrypt(chunk)
-        ciphered_chunk2 = cipher2.encrypt(ciphered_chunk)
-        output_file.write(ciphered_chunk2)
+        while True:
+            chunk = input_file.read(1024 * block_size)
+            if len(chunk) == 0:
+                break
+            elif len(chunk) % block_size != 0:
+                chunk += b' ' * (block_size - len(chunk) % block_size)
+            ciphered_chunk = cipher.encrypt(chunk)
+            ciphered_chunk2 = cipher2.encrypt(ciphered_chunk)
+            output_file.write(ciphered_chunk2)
 
-     
-    
-        output_file.write(cipher2.decrypt(deciphered_chunk))
 
-if name == 'main':
+def decrypt_file(input_file_path, output_file_path, key1, key2):
+    block_size = DES3.block_size
+    with open(input_file_path, 'rb') as input_file, open(output_file_path, 'wb') as output_file:
+        iv = input_file.read(block_size)
+        cipher = DES3.new(key1, DES3.MODE_CBC, iv=iv)
+        cipher2 = DES3.new(key2, DES3.MODE_CBC, iv=iv)
+        while True:
+            chunk = input_file.read(1024 * block_size)
+            if len(chunk) == 0:
+                break
+            deciphered_chunk = cipher.decrypt(chunk)
+
+
+if __name__ == '__main__':
     key1 = bytes.fromhex('00112233445566778899aabbccddeeff')
     key2 = bytes.fromhex('00112233445566778899aabbccddeeff')
 
